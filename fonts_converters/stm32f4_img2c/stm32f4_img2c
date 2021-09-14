@@ -1,0 +1,24 @@
+#!/bin/bash
+
+#  convert Red_Button.svg Red_Button.png
+#  convert Red_Button.png -alpha deactivate -fill black -resize "80x40"! Red_Button.jpg
+#  mogrify -flip Red_Button.jpg
+
+#  convert Yellow_Button.svg -resize "80x40"! Yellow_Button.jpg
+#  mogrify -flip Yellow_Button.png
+#  mogrify -flip Green_button.png
+#  convert Green_button.png -resize "120x72"! Green_button.jpg
+
+#  mkdir bin
+#  make
+#  ./stm32f4_img2c Red_Button.jpg ./
+#  ./stm32f4_img2c Yellow_Button.jpg ./
+#  ./stm32f4_img2c Green_button.jpg ./
+
+BMP_TMP_FILE=stm32f4_im2c.bmp
+convert $1 -define bmp:subtype=RGB565 $BMP_TMP_FILE
+bin/stm32f4_bmp2c $1 $BMP_TMP_FILE $2
+
+#  rm $BMP_TMP_FILE
+# mogrify -flip Red_Button.jpg # mirror vertical
+# mogrify -flop Yellow_Button.jpg # mirror horizontal

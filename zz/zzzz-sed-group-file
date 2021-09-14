@@ -1,0 +1,16 @@
+#!/bin/sh
+
+DIRS=$1
+
+replace() {
+ sed -i s/'0x1UL << zzzPinOut'/'zzzPinOut'/g ${1}
+}
+
+echo "$DIRS" | while read d ; do
+  if test -n "$d" -a -d "$d"; then
+    find "$d" -type f -name '*' | while read SRC; do
+      replace "$SRC"
+    done
+  fi
+done
+

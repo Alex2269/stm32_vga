@@ -1,0 +1,17 @@
+#!/bin/sh
+
+DIRS=$1
+
+replace() {
+ sed -i s/'VGA_DISPLAY_X'/'UB_VGA_Get_X()'/g ${1}
+ sed -i s/'VGA_DISPLAY_Y'/'UB_VGA_Get_Y()'/g ${1}
+}
+
+echo "$DIRS" | while read d ; do
+  if test -n "$d" -a -d "$d"; then
+    find "$d" -type f -name '*' | while read SRC; do
+      replace "$SRC"
+    done
+  fi
+done
+

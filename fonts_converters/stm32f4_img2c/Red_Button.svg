@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="8.333333in"
+   height="4.1666665in"
+   viewBox="0 0 749.99997 375"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
+   sodipodi:docname="Red_Button.svg">
+  <defs
+     id="defs4">
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3370"
+       id="radialGradient3376"
+       cx="434.3056"
+       cy="1288.2046"
+       fx="434.3056"
+       fy="1288.2046"
+       r="424.99997"
+       gradientTransform="matrix(-0.00624894,-1.1460494,1.0720533,-0.00861462,2122.6739,1010.3337)"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient3370">
+      <stop
+         id="stop3374"
+         offset="0"
+         style="stop-color:#000000;stop-opacity:0;" />
+      <stop
+         style="stop-color:#000000;stop-opacity:0"
+         offset="0.16112776"
+         id="stop3380" />
+      <stop
+         id="stop3372"
+         offset="1"
+         style="stop-color:#000000;stop-opacity:1;" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3360"
+       id="linearGradient3366"
+       x1="446.56848"
+       y1="716.40973"
+       x2="446.81851"
+       y2="824.9469"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.88235297,0,0,1.0714286,3117.7732,-619.78417)" />
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient3360">
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0"
+         id="stop3362" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:0;"
+         offset="1"
+         id="stop3364" />
+    </linearGradient>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.2727922"
+     inkscape:cx="426.54006"
+     inkscape:cy="239.83957"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showguides="false"
+     inkscape:window-width="1680"
+     inkscape:window-height="949"
+     inkscape:window-x="0"
+     inkscape:window-y="36"
+     inkscape:window-maximized="1"
+     units="in">
+    <inkscape:grid
+       type="xygrid"
+       id="grid3336"
+       spacingx="10"
+       spacingy="9.9999997"
+       originx="-3117.773"
+       originy="-544.61529" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Red_Button"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-3117.7732,-132.7468)">
+    <rect
+       style="opacity:0.98799995;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.38892224;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="Yellow_Button"
+       width="750"
+       height="374.99997"
+       x="3117.7732"
+       y="132.74681"
+       ry="182.14287" />
+    <rect
+       ry="182.14287"
+       y="132.74681"
+       x="3117.7732"
+       height="374.99997"
+       width="750"
+       id="ButtonGlow"
+       style="opacity:0.48600003;fill:url(#radialGradient3376);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.38892224;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       rx="150" />
+    <path
+       style="opacity:0.98799995;fill:url(#linearGradient3366);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.38892224;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 3298.1007,142.9985 h 383.7195 c 86.1856,0 172.8619,79.035 155.5697,133.5374 h -13.9682 -680.8907 c 0,-73.9797 69.3841,-133.5374 155.5697,-133.5374 z"
+       id="ButtonHighlight "
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="sscccs" />
+  </g>
+</svg>
