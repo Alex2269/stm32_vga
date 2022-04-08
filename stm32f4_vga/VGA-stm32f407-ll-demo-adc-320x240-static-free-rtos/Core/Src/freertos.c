@@ -29,6 +29,7 @@
 #include "adc_cfg.h"
 
 #include "fonts_all_includes.h"
+#include "stm32_tick.h"
 #include "time.h"
 
 /* USER CODE END Includes */
@@ -152,21 +153,34 @@ void MX_FREERTOS_Init(void) {
 void StartTask_01(void *argument)
 {
   /* USER CODE BEGIN StartTask_01 */
-
+  // --
   char buff_time[12];
+  // static volatile uint32_t tick_ms;
   static volatile uint32_t time_ms;
-  save_time_ms(); // start chronometry
 
+  // --
+  ticks_init();
+  ticks_set(0); // start chronometry
+  // --
+  save_time_ms(); // start chronometry
+  // --
   /* Infinite loop */
   for(;;)
   {
     analog_read();
-
+    // --
+    /***
+    tick_ms += ticks_get()/168000; // read chronometry
+    if(ticks_get()>8e6) ticks_set(0); // start chronometry
+    sprintf(buff_time,"%ld ms", tick_ms);
+    fillRect(180, 16, 130, 14, VGA_COL_BLACK);
+    UG_PutString(180, 16, buff_time, VGA_COL_GREEN,VGA_COL_BLACK, &font_Arial_13X14); ***/
+    // --
     time_ms = get_time_new_ms(); // read chronometry
     sprintf(buff_time,"%ld msec", time_ms);
     fillRect(180, 30, 130, 14, VGA_COL_BLACK);
     UG_PutString(180, 30, buff_time, VGA_COL_CYAN,VGA_COL_BLACK, &font_Arial_13X14);
-
+    // --
     osDelay(100);
   }
   /* USER CODE END StartTask_01 */
@@ -178,27 +192,42 @@ void StartTask_01(void *argument)
 * @param argument: Not used
 * @retval None
 */
-volatile uint16_t buff_pump_draw[480] = {0};
-volatile uint16_t buff_pump_clean[480] = {0};
+volatile uint16_t buff_1_draw[320] = {0};
+volatile uint16_t buff_2_draw[320] = {0};
+volatile uint16_t buff_3_draw[320] = {0};
+
+volatile uint16_t buff_1_clean[320] = {0};
+volatile uint16_t buff_2_clean[320] = {0};
+volatile uint16_t buff_3_clean[320] = {0};
+
 /* USER CODE END Header_StartTask_02 */
 void StartTask_02(void *argument)
 {
   /* USER CODE BEGIN StartTask_02 */
   static volatile uint16_t xpos;
-
+  char buff_time[12];
+  static volatile uint32_t tick_ms;
   /* Infinite loop */
   for(;;)
   {
-    // sinusoide_scroll();
-    // for(uint32_t i=0;i<1e4;i++) __asm volatile ("nop");
-
     xpos++;
-    if(xpos > UB_VGA_Get_X()) xpos = 0;
-
-    buff_pump_draw[xpos] = read_adc(ADC1, GPIOA, 0x1UL << 7)/30+52;
-    write_graph_color(xpos, buff_pump_draw, buff_pump_clean, 1, 0x55);
-
-    osDelay(25);
+    if(xpos > UB_VGA_Get_X()-10) { xpos = 8; ticks_set(0); } // start chronometry
+    // --
+    tick_ms = ticks_get()/168000; // read chronometry
+    sprintf(buff_time,"%ld ms", tick_ms);
+    fillRect(180, 16, 130, 14, VGA_COL_BLACK);
+    UG_PutString(180, 16, buff_time, VGA_COL_GREEN,VGA_COL_BLACK, &font_Arial_13X14);
+    // --
+    buff_1_draw[xpos] = read_adc(ADC1, GPIOA, 0x1UL << 4)/36+106;
+    write_graph_color(xpos, buff_1_draw, buff_1_clean, 1, VGA_COL_CYAN);
+    // --
+    buff_2_draw[xpos] = read_adc(ADC1, GPIOA, 0x1UL << 5)/36+108;
+    write_graph_color(xpos, buff_2_draw, buff_2_clean, 1, VGA_COL_YELLOW);
+    // --
+    buff_3_draw[xpos] = read_adc(ADC1, GPIOA, 0x1UL << 6)/36+110;
+    write_graph_color(xpos, buff_3_draw, buff_3_clean, 1, VGA_COL_GREEN);
+    // --
+    osDelay(30);
   }
   /* USER CODE END StartTask_02 */
 }
@@ -214,6 +243,7 @@ void StartTask_03(void *argument)
 {
   /* USER CODE BEGIN StartTask_03 */
   fillRoundRect(8, UB_VGA_Get_Y()-30, UB_VGA_Get_X()-15, 24, 6, VGA_COL_BLUE);
+  UG_PutString(100, UB_VGA_Get_Y()-24, "STATUS BAR", VGA_COL_CYAN,VGA_COL_BLUE, &font_Arial_13X14);
   drawRoundRect(6, UB_VGA_Get_Y()-31, UB_VGA_Get_X()-11, 26, 6, VGA_COL_RED);
   /* Infinite loop */
   for(;;)
@@ -285,6 +315,7 @@ void StartTask_04(void *argument)
     // GOL_UpdateAllCells();
     // GOL_ShowAllCells();
 
+    // clear measuring columns:
     write_graph_dot_line(x_offset + 8 * 0, y_offset, x_offset + 8 * 0, y_offset - val0, level_width, VGA_COL_BLACK);
     write_graph_dot_line(x_offset + 8 * 1, y_offset, x_offset + 8 * 1, y_offset - val1, level_width, VGA_COL_BLACK);
     write_graph_dot_line(x_offset + 8 * 2, y_offset, x_offset + 8 * 2, y_offset - val2, level_width, VGA_COL_BLACK);
@@ -293,7 +324,7 @@ void StartTask_04(void *argument)
     write_graph_dot_line(x_offset + 8 * 5, y_offset, x_offset + 8 * 5, y_offset - val5, level_width, VGA_COL_BLACK);
     write_graph_dot_line(x_offset + 8 * 6, y_offset, x_offset + 8 * 6, y_offset - val6, level_width, VGA_COL_BLACK);
     write_graph_dot_line(x_offset + 8 * 7, y_offset, x_offset + 8 * 7, y_offset - val7, level_width, VGA_COL_BLACK);
-
+    // read measuring PA0-PA8 ADC input
     val0 = read_adc(ADC1, GPIOA, 0x1UL << 0)/40;
     val1 = read_adc(ADC1, GPIOA, 0x1UL << 1)/40;
     val2 = read_adc(ADC1, GPIOA, 0x1UL << 2)/40;
@@ -302,7 +333,7 @@ void StartTask_04(void *argument)
     val5 = read_adc(ADC1, GPIOA, 0x1UL << 5)/40;
     val6 = read_adc(ADC1, GPIOA, 0x1UL << 6)/40;
     val7 = read_adc(ADC1, GPIOA, 0x1UL << 7)/40;
-
+    // draw measuring columns:
     write_graph_dot_line(x_offset + 8 * 0, y_offset, x_offset + 8 * 0, y_offset - val0, level_width, VGA_COL_CYAN);
     write_graph_dot_line(x_offset + 8 * 1, y_offset, x_offset + 8 * 1, y_offset - val1, level_width, VGA_COL_MAGENTA);
     write_graph_dot_line(x_offset + 8 * 2, y_offset, x_offset + 8 * 2, y_offset - val2, level_width, VGA_COL_YELLOW);

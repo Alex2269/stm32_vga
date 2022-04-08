@@ -185,10 +185,10 @@ void draw_dot_grid(void)
       for(uint16_t x = 10; x<UB_VGA_Get_Y()-16; x+=32)
           for(uint16_t i = 4; i<UB_VGA_Get_X()-16; i+= 4)writePixel(i, x, VGA_COL_GREEN);
       */
-      for(uint16_t x = 106;x<UB_VGA_Get_Y()-36;x+= 8)
+      for(uint16_t x = 106;x<UB_VGA_Get_Y()-36;x+= 4)
         for(uint16_t i = 16; i<UB_VGA_Get_X()-15; i+=32) writePixel(i, x, VGA_COL_BLUE);
       for(uint16_t x = 106;x<UB_VGA_Get_Y()-36;x+=32)
-        for(uint16_t i = 16; i<UB_VGA_Get_X()-15; i+=8) writePixel(i, x, VGA_COL_GREEN);
+        for(uint16_t i = 16; i<UB_VGA_Get_X()-15; i+=4) writePixel(i, x, VGA_COL_BLUE);
     }
 }
 

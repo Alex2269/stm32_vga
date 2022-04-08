@@ -19,3 +19,11 @@
    git push -u origin master
    git pull
    #******************************************
+
+   #******************************************
+   #  git log
+   #  git reset --hard  <commit-hash-xxx>
+   #  git reset --hard  <commit-hash-xxy>
+   #  git reset --hard  <commit-hash-xxz>
+   #  git push origin HEAD --force
+   #******************************************
